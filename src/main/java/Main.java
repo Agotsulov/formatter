@@ -10,11 +10,8 @@ public class Main {
         OutStream fw = new FileOutStream(nameFileOut);
 
         Format.format(fr, fw);
-        if(FormatTest.test("123;()","123;\n (  ) ") == false){
-            System.out.print("False");
-        }else{
-            System.out.print("True");
-        }
+        FormatTestConsole.allTests();
+
         fw.close();
  	}
 }
