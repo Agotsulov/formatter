@@ -23,6 +23,7 @@ public class StringOutStream implements OutStream{
     }
 
     public String getString(){
-        return outString;
+        if (outString == null) return "";
+        else return outString;
     }
 }

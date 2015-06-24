@@ -2,10 +2,11 @@ import java.io.*;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         String nameFileIn = args[0];
         String nameFileOut = args[1];
-
+        //String nameFileIn = "input.txt";
+        //String nameFileOut = "output.txt";
         InStream fr = new FileInStream(nameFileIn);
         OutStream fw = new FileOutStream(nameFileOut);
 
@@ -13,5 +14,5 @@ public class Main {
         FormatTestConsole.allTests();
 
         fw.close();
- 	}
+    }
 }
