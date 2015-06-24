@@ -2,6 +2,7 @@
     abs
 }
 abs;
+dae = fasd ( 123 + 132 ) ;
 1    2      3;
 321;
 maine ( nda,ddaaaa ) ;

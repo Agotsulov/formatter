@@ -1,9 +1,7 @@
 import java.io.IOException;
 import java.lang.String;
 
-/**
- * Created by byzilio on 09.07.14.
- */
+
 public class StringOutStream implements OutStream{
     private String outString;
     private boolean firstWrite = false;

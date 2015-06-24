@@ -49,7 +49,7 @@ public class FormatTestConsole {
     }
 
     public static boolean testExtraSpaces() throws IOException {
-        return test("                  abs", "abs");
+        return test("                    abs", "abs");
     }
 
     public static boolean testExtraLines() throws IOException{

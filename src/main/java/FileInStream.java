@@ -1,8 +1,6 @@
 import java.io.*;
 
-/** 123123123123123
- * Created by byzilio on 08.07.14.
- */
+
 public class FileInStream implements InStream {
     private Reader fileReader;
     private boolean end = false;

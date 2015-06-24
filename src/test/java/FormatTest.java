@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by byzilio on 10.07.14.
- */
+
 public class FormatTest {
 
     @Test

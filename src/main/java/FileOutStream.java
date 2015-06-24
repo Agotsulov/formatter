@@ -1,5 +1,8 @@
 import java.io.*;
 
+
+
+
 public class FileOutStream implements OutStream {
     private Writer fileWriter;
 

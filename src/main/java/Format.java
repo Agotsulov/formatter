@@ -23,7 +23,7 @@ public class Format {
                 indent = true;
                 indentLevel = indentLevel + 1;
             } else if (currentSymbol == '}') {
-                for (int j = 0; j < indentLevel - 1; j++) {
+                for (int j = 0; j < indentLevel-1; j++) {
                     outStream.writeString(INDENT_STRING);
                 }
                 if (lastSymbol != ';') outStream.writeSymbol('\n');
