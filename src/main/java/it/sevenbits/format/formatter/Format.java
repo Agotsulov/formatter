@@ -1,11 +1,16 @@
+package it.sevenbits.format.formatter;
+
+    import it.sevenbits.format.streams.InStream;
+import it.sevenbits.format.streams.OutStream;
+
 import java.io.*;
 
 public class Format {
 
-    public static final String INDENT_STRING = "    ";
+    public static String indentString;
 
-    public static void format(InStream inStream, OutStream outStream) throws IOException {
-
+    public static void format(InStream inStream, OutStream outStream,FormatSettings formatSettings) throws IOException {
+        indentString = formatSettings.getIndentString();
         char currentSymbol;
         char lastSymbol = ' ';
         boolean indent = true;
@@ -16,7 +21,7 @@ public class Format {
             if (inStream.isEnd()) break;
             if (currentSymbol == '{') {
                 for (int j = 0; j < indentLevel; j++) {
-                    outStream.writeString(INDENT_STRING);
+                    outStream.writeString(indentString);
                 }
                 outStream.writeSymbol('{');
                 outStream.writeSymbol('\n');
@@ -24,7 +29,7 @@ public class Format {
                 indentLevel = indentLevel + 1;
             } else if (currentSymbol == '}') {
                 for (int j = 0; j < indentLevel-1; j++) {
-                    outStream.writeString(INDENT_STRING);
+                    outStream.writeString(indentString);
                 }
                 if (lastSymbol != ';') outStream.writeSymbol('\n');
                 outStream.writeSymbol('}');
@@ -37,9 +42,9 @@ public class Format {
                     outStream.writeSymbol('\n');
                     indent = true;
                 } else if ((currentSymbol == '(') || (currentSymbol == ')') || (currentSymbol == '=') || (currentSymbol == '+') || (currentSymbol == '-') || (currentSymbol == '*') || (currentSymbol == '/')) {
-                    outStream.writeSymbol(' ');
+                    //outStream.writeSymbol(' ');
                     outStream.writeSymbol(currentSymbol);
-                    outStream.writeSymbol(' ');
+                    //outStream.writeSymbol(' ');
                 } else if (currentSymbol != '\n') {
                     if ((currentSymbol == ' ') && (indent == true)) {
                         continue;
@@ -47,7 +52,7 @@ public class Format {
                     if ((currentSymbol != ' ') ||((currentSymbol == ' ') && (indent == false) )) {
                         if (indent == true){
                             for (int j = 0; j < indentLevel; j++) {
-                                outStream.writeString(INDENT_STRING);
+                                outStream.writeString(indentString);
                             }
                             indent = false;
                         }

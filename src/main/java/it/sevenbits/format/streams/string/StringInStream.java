@@ -1,3 +1,7 @@
+package it.sevenbits.format.streams.string;
+
+import it.sevenbits.format.streams.InStream;
+
 import java.io.IOException;
 import java.lang.String;
 

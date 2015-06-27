@@ -1,3 +1,7 @@
+package it.sevenbits.format.streams.file;
+
+import it.sevenbits.format.streams.OutStream;
+
 import java.io.*;
 
 

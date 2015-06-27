@@ -1,3 +1,5 @@
+package it.sevenbits.format.streams;
+
 import java.io.IOException;
 
 public interface InStream {
