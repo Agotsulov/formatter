@@ -1,6 +1,7 @@
 package it.sevenbits.format;
 
 import it.sevenbits.format.formatter.Format;
+import it.sevenbits.format.formatter.Format2;
 import it.sevenbits.format.formatter.FormatSettings;
 import it.sevenbits.format.streams.InStream;
 import it.sevenbits.format.streams.OutStream;
@@ -19,7 +20,8 @@ public class Main {
         FormatSettings formatSettings = new FormatSettings("formatter.properties");
 
 
-        Format.format(fr, fw, formatSettings);
+        //Format.format(fr, fw, formatSettings);
+        Format2.format(fr ,fw, formatSettings);
         //FormatTestConsole.allTests();
 
         fw.close();

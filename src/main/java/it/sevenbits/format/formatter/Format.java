@@ -45,7 +45,7 @@ public class Format {
                     //outStream.writeSymbol(' ');
                     outStream.writeSymbol(currentSymbol);
                     //outStream.writeSymbol(' ');
-                } else if (currentSymbol != '\n') {
+                } else if ((currentSymbol != '\n') && (currentSymbol != '\r')) {
                     if ((currentSymbol == ' ') && (indent == true)) {
                         continue;
                     }
@@ -64,5 +64,14 @@ public class Format {
 
             lastSymbol = currentSymbol;
         } //while(true)
+
+        if((indentLevel > 0) && (formatSettings.getExtraBraces()==true)) {
+            outStream.writeString("\n"+"//Error:More brace on "+indentLevel);
+        }
+
+        if((indentLevel < 0) && (formatSettings.getExtraBraces()==true)) {
+            outStream.writeString("\n"+"//Error:Less brace on "+indentLevel*-1);
+        }
+
     }
 }

@@ -9,6 +9,7 @@ public class FormatSettings {
     private char indentChar;
     private String indentString = "";
     private int indentLenght;
+    private boolean extraBraces;
     private Properties properties;
     public FormatSettings(){
         setDefaultSettings();
@@ -20,12 +21,16 @@ public class FormatSettings {
         properties.load(fileReader);
         indentLenght = Integer.parseInt(properties.getProperty("indentLenght"));
         indentChar = properties.getProperty("indentChar").charAt(1);
+        extraBraces = Boolean.parseBoolean(properties.getProperty("extraBraces"));
+
         setSetting();
     }
+
     private void  setDefaultSettings() {
         for (int i = 0;i < INDENT_LENGHT_DEFAULT;i++) {
             indentString = indentString + INDENT_CHAR_DEFAULT;
         }
+        extraBraces = false;
     }
     private void setSetting(){
         for (int i = 0;i < indentLenght;i++) {
@@ -35,4 +40,5 @@ public class FormatSettings {
     public String getIndentString (){
         return indentString;
     }
+    public boolean getExtraBraces () { return extraBraces; }
 }
