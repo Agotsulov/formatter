@@ -1,6 +1,7 @@
 package it.sevenbits.format.tests;
 
 import it.sevenbits.format.formatter.Format;
+import it.sevenbits.format.formatter.Format2;
 import it.sevenbits.format.formatter.FormatSettings;
 import it.sevenbits.format.streams.InStream;
 import it.sevenbits.format.streams.OutStream;
@@ -97,5 +98,37 @@ public class FormatTest {
         Format.format(sr, sw, formatSettings);
 
         assertEquals("df;\n", sw.getString());
+    }
+
+    @Test
+    public void testNewFormatterAndOld() throws IOException{
+        InStream sr = new StringInStream("public class Main {\n" +
+                "                      public static void main(String[] args) throws IOException {\n" +
+                " String nameFileIn = args[0];" +
+                "     String nameFileOut = args[1];" +
+                "        InStream fr = new FileInStream(nameFileIn);" +
+                "    OutStream fw = new FileOutStream(nameFileOut);\n" +
+                " FormatSettings formatSettings = new FormatSettings(\"formatter.properties\");\n" +
+                "\n" +
+                "\n" +
+                "                           //Format.format(fr, fw, formatSettings);\n" +
+                "  Format2.format(fr ,fw, formatSettings);" +
+                "           //FormatTestConsole.allTests();\n" +
+                "\n" +
+                "        fw.close();" +
+                "  }" +
+                "              }");
+        OutStream sw = new StringOutStream();
+
+        FormatSettings formatSettings = new FormatSettings();
+        String newFormat;
+        String oldFormat;
+
+        Format.format(sr,sw,formatSettings);
+        oldFormat = sw.getString();
+        Format2.format(sr, sw, formatSettings);
+        newFormat = sw.getString();
+
+        assertEquals(oldFormat,newFormat);
     }
 }
