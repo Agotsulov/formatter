@@ -12,12 +12,12 @@ import java.io.*;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         String nameFileIn = args[0];
         String nameFileOut = args[1];
         InStream fr = new FileInStream(nameFileIn);
         OutStream fw = new FileOutStream(nameFileOut);
-        FormatSettings formatSettings = new FormatSettings("formatter.properties");
+        FormatSettings formatSettings = new FormatSettings("formatter.properties","test.json");
 
 
         //Format.format(fr, fw, formatSettings);

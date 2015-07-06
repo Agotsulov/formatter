@@ -14,10 +14,13 @@ public class Format2 {
     public static String indentString;
     public static int pastHandlers;
     public static ArrayList<Handler> handlers = new ArrayList<Handler>();
-    public static void format(InStream inStream, OutStream outStream,FormatSettings formatSettings) throws IOException {
+    public static void format(InStream inStream, OutStream outStream,FormatSettings formatSettings) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         indentString = formatSettings.getIndentString();
         char currentSymbol;
-        handlers.add(new SemicolonHandler());
+        Class c = Class.forName("it.sevenbits.format.handlers.SemicolonHandler");
+        Object o =  c.newInstance();
+        handlers.add((Handler) o);
+        //handlers.add(new SemicolonHandler());
         handlers.add(new OpenBraceHandler());
         handlers.add(new CloseBraceHandler());
         handlers.add(new ExtraSpacesHandler());

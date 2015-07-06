@@ -101,7 +101,7 @@ public class FormatTest {
     }
 
     @Test
-    public void testNewFormatterAndOld() throws IOException{
+    public void testNewFormatterAndOld() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
         InStream sr = new StringInStream("public class Main {\n" +
                 "                      public static void main(String[] args) throws IOException {\n" +
                 " String nameFileIn = args[0];" +

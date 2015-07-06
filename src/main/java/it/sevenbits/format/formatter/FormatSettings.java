@@ -1,5 +1,8 @@
 package it.sevenbits.format.formatter;
 
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -14,9 +17,17 @@ public class FormatSettings {
     public FormatSettings(){
         setDefaultSettings();
     }
-    public FormatSettings(final String fileName) throws IOException {
+    public FormatSettings(final String fileName, final String jsonFileName) throws IOException {
         Reader fileReader;
+        Reader jFileReader;
         fileReader = new FileReader(new File(fileName));
+        jFileReader = new FileReader(new File(jsonFileName));
+        JsonReader jReader = new JsonReader(jFileReader);
+        Gson json = new Gson();
+        jReader.beginObject();
+        //jReader.nextName();
+        //int one = json.fromJson(jReader,int.class);
+        System.out.println("name:"+jReader.nextName()+" "+jReader.nextInt());
         properties = new Properties();
         properties.load(fileReader);
         indentLenght = Integer.parseInt(properties.getProperty("indentLenght"));
