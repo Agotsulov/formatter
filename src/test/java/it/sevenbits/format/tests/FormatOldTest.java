@@ -1,7 +1,7 @@
 package it.sevenbits.format.tests;
 
 import it.sevenbits.format.formatter.Format;
-import it.sevenbits.format.formatter.Format2;
+import it.sevenbits.format.formatter.FormatOld;
 import it.sevenbits.format.formatter.FormatSettings;
 import it.sevenbits.format.streams.InStream;
 import it.sevenbits.format.streams.OutStream;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 
-public class FormatTest {
+public class FormatOldTest {
 
     @Test
     public void emptyStringTest() throws IOException {
@@ -22,7 +22,7 @@ public class FormatTest {
         OutStream sw = new StringOutStream();
         FormatSettings formatSettings = new FormatSettings();
 
-        Format.format(sr, sw ,formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
 
         assertEquals("", sw.getString());
     }
@@ -33,7 +33,7 @@ public class FormatTest {
         OutStream sw = new StringOutStream();
         FormatSettings formatSettings = new FormatSettings();
 
-        Format.format(sr, sw, formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
 
         assertEquals("asd;\n", sw.getString());
     }
@@ -45,7 +45,7 @@ public class FormatTest {
 
         FormatSettings formatSettings = new FormatSettings();
 
-        Format.format(sr, sw, formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
 
         assertEquals("{\n    asd;\n}\n", sw.getString());
     }
@@ -59,7 +59,7 @@ public class FormatTest {
 
         FormatSettings formatSettings = new FormatSettings();
 
-        Format.format(sr, sw, formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
 
         assertEquals("{\n    {\n        asd;\n    }\n\n}\n", sw.getString());
     }
@@ -82,7 +82,7 @@ public class FormatTest {
 
         FormatSettings formatSettings = new FormatSettings();
 
-        Format.format(sr, sw, formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
 
         assertEquals("abs", sw.getString());
     }
@@ -95,7 +95,7 @@ public class FormatTest {
 
         FormatSettings formatSettings = new FormatSettings();
 
-        Format.format(sr, sw, formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
 
         assertEquals("df;\n", sw.getString());
     }
@@ -111,8 +111,8 @@ public class FormatTest {
                 " FormatSettings formatSettings = new FormatSettings(\"formatter.properties\");\n" +
                 "\n" +
                 "\n" +
-                "                           //Format.format(fr, fw, formatSettings);\n" +
-                "  Format2.format(fr ,fw, formatSettings);" +
+                "                           //FormatOld.format(fr, fw, formatSettings);\n" +
+                "  Format.format(fr ,fw, formatSettings);" +
                 "           //FormatTestConsole.allTests();\n" +
                 "\n" +
                 "        fw.close();" +
@@ -124,9 +124,9 @@ public class FormatTest {
         String newFormat;
         String oldFormat;
 
-        Format.format(sr,sw,formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
         oldFormat = sw.getString();
-        Format2.format(sr, sw, formatSettings);
+        Format.format(sr, sw, formatSettings);
         newFormat = sw.getString();
 
         assertEquals(oldFormat,newFormat);

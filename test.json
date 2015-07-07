@@ -1,3 +1,6 @@
-{
-  "id":1234
-}
+[
+  "it.sevenbits.format.handlers.SemicolonHandler",
+  "it.sevenbits.format.handlers.CloseBraceHandler",
+  "it.sevenbits.format.handlers.OpenBraceHandler",
+  "it.sevenbits.format.handlers.ExtraSpacesHandler"
+]

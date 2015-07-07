@@ -1,9 +1,13 @@
 package it.sevenbits.format.formatter;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import it.sevenbits.format.handlers.Handler;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class FormatSettings {
@@ -14,26 +18,22 @@ public class FormatSettings {
     private int indentLenght;
     private boolean extraBraces;
     private Properties properties;
+    private Reader jFileReader;
+    private Reader fileReader;
     public FormatSettings(){
         setDefaultSettings();
     }
     public FormatSettings(final String fileName, final String jsonFileName) throws IOException {
-        Reader fileReader;
-        Reader jFileReader;
         fileReader = new FileReader(new File(fileName));
         jFileReader = new FileReader(new File(jsonFileName));
-        JsonReader jReader = new JsonReader(jFileReader);
-        Gson json = new Gson();
-        jReader.beginObject();
         //jReader.nextName();
         //int one = json.fromJson(jReader,int.class);
-        System.out.println("name:"+jReader.nextName()+" "+jReader.nextInt());
+        //System.out.println("name:"+jReader.nextName()+" "+jReader.nextInt());
         properties = new Properties();
         properties.load(fileReader);
         indentLenght = Integer.parseInt(properties.getProperty("indentLenght"));
         indentChar = properties.getProperty("indentChar").charAt(1);
         extraBraces = Boolean.parseBoolean(properties.getProperty("extraBraces"));
-
         setSetting();
     }
 
@@ -47,6 +47,20 @@ public class FormatSettings {
         for (int i = 0;i < indentLenght;i++) {
             indentString = indentString + indentChar;
         }
+    }
+    public ArrayList<Handler> getHandlersList() throws ClassNotFoundException, IllegalAccessException, InstantiationException, IOException {
+        ArrayList<Handler> outList = new ArrayList<Handler>();
+        Gson json = new Gson();
+        JsonReader jReader = new JsonReader(jFileReader);
+        ArrayList<String> handlers = json.fromJson(jReader,new TypeToken<List<String>>(){}.getType());
+        for (int i = 0; i < handlers.size(); i++) {
+            Class c = Class.forName(handlers.get(i));
+
+            Object o = c.newInstance();
+            outList.add((Handler) o);
+        }
+
+        return outList;
     }
     public String getIndentString (){
         return indentString;

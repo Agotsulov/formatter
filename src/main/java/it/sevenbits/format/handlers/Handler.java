@@ -1,6 +1,5 @@
 package it.sevenbits.format.handlers;
 
-import it.sevenbits.format.formatter.Format2;
 import it.sevenbits.format.streams.OutStream;
 
 import java.io.IOException;

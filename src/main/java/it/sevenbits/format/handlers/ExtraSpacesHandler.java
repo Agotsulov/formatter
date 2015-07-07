@@ -1,7 +1,6 @@
 package it.sevenbits.format.handlers;
 
-import it.sevenbits.format.formatter.Format2;
-import it.sevenbits.format.handlers.Handler;
+import it.sevenbits.format.formatter.Format;
 import it.sevenbits.format.streams.OutStream;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class ExtraSpacesHandler implements Handler {
     }
 
     public void action(OutStream outStream) throws IOException {
-        if (Format2.isNewLine == false ) outStream.writeSymbol(' ');
-        Format2.indent = false;
+        if (Format.isNewLine == false ) outStream.writeSymbol(' ');
+        Format.indent = false;
     }
 }

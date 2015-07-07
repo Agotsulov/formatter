@@ -1,77 +1,44 @@
 package it.sevenbits.format.formatter;
 
-    import it.sevenbits.format.streams.InStream;
+import it.sevenbits.format.handlers.*;
+import it.sevenbits.format.streams.InStream;
 import it.sevenbits.format.streams.OutStream;
 
-import java.io.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Format {
-
+    public static boolean indent = false;
+    public static boolean isNewLine = true;
+    public static int indentLevel = 0;
     public static String indentString;
-
-    public static void format(InStream inStream, OutStream outStream,FormatSettings formatSettings) throws IOException {
+    public static int pastHandlers;
+    public static ArrayList<Handler> handlers = new ArrayList<Handler>();
+    public static void format(InStream inStream, OutStream outStream,FormatSettings formatSettings) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         indentString = formatSettings.getIndentString();
         char currentSymbol;
-        char lastSymbol = ' ';
-        boolean indent = true;
-        int indentLevel = 0;
-
+        handlers = formatSettings.getHandlersList();
         while (true) {
+            pastHandlers = 0;
             currentSymbol = inStream.readSymbol();
             if (inStream.isEnd()) break;
-            if (currentSymbol == '{') {
+            if (indent == true){
                 for (int j = 0; j < indentLevel; j++) {
                     outStream.writeString(indentString);
                 }
-                outStream.writeSymbol('{');
-                outStream.writeSymbol('\n');
-                indent = true;
-                indentLevel = indentLevel + 1;
-            } else if (currentSymbol == '}') {
-                for (int j = 0; j < indentLevel-1; j++) {
-                    outStream.writeString(indentString);
-                }
-                if (lastSymbol != ';') outStream.writeSymbol('\n');
-                outStream.writeSymbol('}');
-                outStream.writeSymbol('\n');
-                indent = true;
-                indentLevel = indentLevel - 1;
-            } else {
-                if (currentSymbol == ';') {
-                    outStream.writeSymbol(';');
-                    outStream.writeSymbol('\n');
-                    indent = true;
-                } else if ((currentSymbol == '(') || (currentSymbol == ')') || (currentSymbol == '=') || (currentSymbol == '+') || (currentSymbol == '-') || (currentSymbol == '*') || (currentSymbol == '/')) {
-                    //outStream.writeSymbol(' ');
-                    outStream.writeSymbol(currentSymbol);
-                    //outStream.writeSymbol(' ');
-                } else if ((currentSymbol != '\n') && (currentSymbol != '\r')) {
-                    if ((currentSymbol == ' ') && (indent == true)) {
-                        continue;
-                    }
-                    if ((currentSymbol != ' ') ||((currentSymbol == ' ') && (indent == false) )) {
-                        if (indent == true){
-                            for (int j = 0; j < indentLevel; j++) {
-                                outStream.writeString(indentString);
-                            }
-                            indent = false;
-                        }
-                        outStream.writeSymbol(currentSymbol);
-                        //indent = true;
-                    }
-                }
             }
-
-            lastSymbol = currentSymbol;
-        } //while(true)
-
-        if((indentLevel > 0) && (formatSettings.getExtraBraces()==true)) {
-            outStream.writeString("\n"+"//Error:More brace on "+indentLevel);
+            for (int i = 0; i < handlers.size(); i++) {
+                if (handlers.get(i).canDo(currentSymbol)){
+                    handlers.get(i).action(outStream);
+                    break;
+                }
+                pastHandlers++;
+            }
+            if (pastHandlers ==  handlers.size()){
+                outStream.writeSymbol(currentSymbol);
+                indent = false;
+                isNewLine = false;
+            }
         }
-
-        if((indentLevel < 0) && (formatSettings.getExtraBraces()==true)) {
-            outStream.writeString("\n"+"//Error:Less brace on "+indentLevel*-1);
-        }
-
     }
 }

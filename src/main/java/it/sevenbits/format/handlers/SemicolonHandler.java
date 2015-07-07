@@ -1,7 +1,6 @@
 package it.sevenbits.format.handlers;
 
-import it.sevenbits.format.formatter.Format2;
-import it.sevenbits.format.handlers.Handler;
+import it.sevenbits.format.formatter.Format;
 import it.sevenbits.format.streams.OutStream;
 
 import java.io.IOException;
@@ -17,10 +16,9 @@ public class SemicolonHandler implements Handler {
 
     public void action(OutStream outStream) throws IOException {
         outStream.writeSymbol(';');
-        System.out.println("SC");
         outStream.writeSymbol('\n');
-        Format2.indent = true;
-        Format2.isNewLine = true;
+        Format.indent = true;
+        Format.isNewLine = true;
 
     }
 }

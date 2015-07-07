@@ -1,6 +1,6 @@
 package it.sevenbits.format.tests;
 
-import it.sevenbits.format.formatter.Format;
+import it.sevenbits.format.formatter.FormatOld;
 import it.sevenbits.format.formatter.FormatSettings;
 import it.sevenbits.format.streams.InStream;
 import it.sevenbits.format.streams.OutStream;
@@ -16,7 +16,7 @@ public class FormatTestConsole {
 
         FormatSettings formatSettings = new FormatSettings();
 
-        Format.format(sr, sw, formatSettings);
+        FormatOld.format(sr, sw, formatSettings);
 
         if(trueString.equals(sw.getString())){
             return true;

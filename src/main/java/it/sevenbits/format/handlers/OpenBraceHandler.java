@@ -1,7 +1,6 @@
 package it.sevenbits.format.handlers;
 
-import it.sevenbits.format.formatter.Format2;
-import it.sevenbits.format.handlers.Handler;
+import it.sevenbits.format.formatter.Format;
 import it.sevenbits.format.streams.OutStream;
 
 import java.io.IOException;
@@ -18,10 +17,9 @@ public class OpenBraceHandler implements Handler {
     public void action(OutStream outStream) throws IOException {
         outStream.writeSymbol('{');
         outStream.writeSymbol('\n');
-        System.out.println("OB");
-        Format2.indent = true;
-        Format2.isNewLine = true;
+        Format.indent = true;
+        Format.isNewLine = true;
 
-        Format2.indentLevel = Format2.indentLevel + 1;
+        Format.indentLevel = Format.indentLevel + 1;
     }
 }

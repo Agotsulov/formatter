@@ -1,7 +1,6 @@
 package it.sevenbits.format.handlers;
 
-import it.sevenbits.format.formatter.Format2;
-import it.sevenbits.format.handlers.Handler;
+import it.sevenbits.format.formatter.Format;
 import it.sevenbits.format.streams.OutStream;
 
 import java.io.IOException;
@@ -18,15 +17,14 @@ public class CloseBraceHandler implements Handler {
     public void action(OutStream outStream) throws IOException {
         outStream.writeSymbol('\n');
 
-        for (int j = 0; j < Format2.indentLevel - 1; j++) {
-            outStream.writeString(Format2.indentString);
+        for (int j = 0; j < Format.indentLevel - 1; j++) {
+            outStream.writeString(Format.indentString);
         }
-        System.out.println("CB");
         outStream.writeSymbol('}');
         outStream.writeSymbol('\n');
-        Format2.indent = true;
-        Format2.isNewLine = true;
+        Format.indent = true;
+        Format.isNewLine = true;
 
-        Format2.indentLevel = Format2.indentLevel - 1;
+        Format.indentLevel = Format.indentLevel - 1;
     }
 }
