@@ -21,7 +21,7 @@ public class StringInStream implements InStream {
         if(numberSymbol == currentString.length() ){
             end = true;
         }
-        if(end == false){
+        if(!end){
             currentSymbol = currentString.charAt(numberSymbol);
             numberSymbol += 1;
         }

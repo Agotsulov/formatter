@@ -8,12 +8,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Format {
+
     public static boolean indent = false;
     public static boolean isNewLine = true;
     public static int indentLevel = 0;
+
     public static String indentString;
+
     public static int pastHandlers;
+
     public static ArrayList<Handler> handlers = new ArrayList<Handler>();
+
     public static void format(InStream inStream, OutStream outStream,FormatSettings formatSettings) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         indentString = formatSettings.getIndentString();
         char currentSymbol;
@@ -22,14 +27,14 @@ public class Format {
             pastHandlers = 0;
             currentSymbol = inStream.readSymbol();
             if (inStream.isEnd()) break;
-            if (indent == true){
+            if (indent){
                 for (int j = 0; j < indentLevel; j++) {
                     outStream.writeString(indentString);
                 }
             }
-            for (int i = 0; i < handlers.size(); i++) {
-                if (handlers.get(i).canDo(currentSymbol)){
-                    handlers.get(i).action(outStream);
+            for (Handler handler : handlers) {
+                if (handler.canDo(currentSymbol)) {
+                    handler.action(outStream);
                     break;
                 }
                 pastHandlers++;

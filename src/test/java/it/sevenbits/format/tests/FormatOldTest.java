@@ -120,13 +120,15 @@ public class FormatOldTest {
                 "              }");
         OutStream sw = new StringOutStream();
 
-        FormatSettings formatSettings = new FormatSettings();
+        FormatSettings formatOldSettings = new FormatSettings();
+        FormatSettings formatNewSettings = new FormatSettings("formatter.properties", "test.json");
+
         String newFormat;
         String oldFormat;
 
-        FormatOld.format(sr, sw, formatSettings);
+        FormatOld.format(sr, sw, formatOldSettings);
         oldFormat = sw.getString();
-        Format.format(sr, sw, formatSettings);
+        Format.format(sr, sw, formatNewSettings);
         newFormat = sw.getString();
 
         assertEquals(oldFormat,newFormat);

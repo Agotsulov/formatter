@@ -11,18 +11,24 @@ import java.util.List;
 import java.util.Properties;
 
 public class FormatSettings {
+
     private static final char INDENT_CHAR_DEFAULT = ' ';
-    private static final int INDENT_LENGHT_DEFAULT = 4;
+    private static final int INDENT_LENGTH_DEFAULT = 4;
+
     private char indentChar;
     private String indentString = "";
-    private int indentLenght;
+    private int indentLength;
     private boolean extraBraces;
+
     private Properties properties;
+
     private Reader jFileReader;
     private Reader fileReader;
+
     public FormatSettings(){
         setDefaultSettings();
     }
+
     public FormatSettings(final String fileName, final String jsonFileName) throws IOException {
         fileReader = new FileReader(new File(fileName));
         jFileReader = new FileReader(new File(jsonFileName));
@@ -31,24 +37,23 @@ public class FormatSettings {
         //System.out.println("name:"+jReader.nextName()+" "+jReader.nextInt());
         properties = new Properties();
         properties.load(fileReader);
-        indentLenght = Integer.parseInt(properties.getProperty("indentLenght"));
+        indentLength = Integer.parseInt(properties.getProperty("indentLenght"));
         indentChar = properties.getProperty("indentChar").charAt(1);
         extraBraces = Boolean.parseBoolean(properties.getProperty("extraBraces"));
         setSetting();
     }
 
     private void  setDefaultSettings() {
-        for (int i = 0;i < INDENT_LENGHT_DEFAULT;i++) {
+        for (int i = 0; i < INDENT_LENGTH_DEFAULT; i++)
             indentString = indentString + INDENT_CHAR_DEFAULT;
-        }
         extraBraces = false;
     }
     private void setSetting(){
-        for (int i = 0;i < indentLenght;i++) {
+        for (int i = 0; i < indentLength; i++)
             indentString = indentString + indentChar;
-        }
+
     }
-    public ArrayList<Handler> getHandlersList() throws ClassNotFoundException, IllegalAccessException, InstantiationException, IOException {
+    public ArrayList<Handler> getHandlersList() throws ClassNotFoundException, IllegalAccessException, InstantiationException  {
         ArrayList<Handler> outList = new ArrayList<Handler>();
         Gson json = new Gson();
         JsonReader jReader = new JsonReader(jFileReader);
@@ -62,8 +67,11 @@ public class FormatSettings {
 
         return outList;
     }
+
     public String getIndentString (){
         return indentString;
     }
+
     public boolean getExtraBraces () { return extraBraces; }
+
 }

@@ -10,13 +10,13 @@ import java.io.IOException;
  */
 public class OpenBraceHandler implements Handler {
     public boolean canDo(char symbol) {
-        if (symbol == '{') return true;
-        return false;
+        return symbol == '{';
     }
 
     public void action(OutStream outStream) throws IOException {
         outStream.writeSymbol('{');
         outStream.writeSymbol('\n');
+
         Format.indent = true;
         Format.isNewLine = true;
 

@@ -8,21 +8,22 @@ import java.lang.String;
 
 public class StringOutStream implements OutStream {
     private String outString;
+
     private boolean firstWrite = false;
 
-    public void writeSymbol(char symbol) throws IOException{
-        if(firstWrite == false){
+    public void writeSymbol(char symbol) {
+        if(!firstWrite){
             outString = "" + symbol;
             firstWrite = true;
         }else {
             outString = outString + symbol;
         }
     }
-    public void writeString(String string) throws IOException{
+    public void writeString(String string) {
         outString = outString + string;
     }
-    public void close() throws IOException{
-    }
+
+    public void close() {}
 
     public String getString(){
         if (outString == null) return "";

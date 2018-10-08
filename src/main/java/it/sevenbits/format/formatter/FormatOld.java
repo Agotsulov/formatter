@@ -1,6 +1,6 @@
 package it.sevenbits.format.formatter;
 
-    import it.sevenbits.format.streams.InStream;
+import it.sevenbits.format.streams.InStream;
 import it.sevenbits.format.streams.OutStream;
 
 import java.io.*;

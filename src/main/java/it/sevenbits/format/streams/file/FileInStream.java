@@ -6,13 +6,15 @@ import java.io.*;
 
 
 public class FileInStream implements InStream {
+
     private Reader fileReader;
+
     private boolean end = false;
+
     public FileInStream(final String fileName) throws FileNotFoundException {
         this.fileReader = new FileReader(new File(fileName));
     }
 
-    //@Override
     public char readSymbol() throws IOException {
         int i = this.fileReader.read();
         if (i == -1) {

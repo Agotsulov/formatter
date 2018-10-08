@@ -1,14 +1,5 @@
-{
-    abs;
+aaa {
+    bbbb;
+    ccc;
     
 }
-das();
-{
-    as     ddsd;
-    {
-        dasd;
-        
-    }
-    
-}
-

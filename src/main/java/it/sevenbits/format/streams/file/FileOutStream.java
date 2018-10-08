@@ -4,9 +4,6 @@ import it.sevenbits.format.streams.OutStream;
 
 import java.io.*;
 
-
-
-
 public class FileOutStream implements OutStream {
     private Writer fileWriter;
 
@@ -25,6 +22,7 @@ public class FileOutStream implements OutStream {
     public void close() throws IOException{
         this.fileWriter.close();
     }
+
     public String getString(){
         return "null";
     }

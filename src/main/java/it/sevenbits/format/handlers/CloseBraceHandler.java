@@ -10,18 +10,18 @@ import java.io.IOException;
  */
 public class CloseBraceHandler implements Handler {
     public boolean canDo(char symbol) {
-        if (symbol == '}') return true;
-        return false;
+        return symbol == '}';
     }
 
     public void action(OutStream outStream) throws IOException {
         outStream.writeSymbol('\n');
 
-        for (int j = 0; j < Format.indentLevel - 1; j++) {
+        for (int j = 0; j < Format.indentLevel - 1; j++)
             outStream.writeString(Format.indentString);
-        }
+
         outStream.writeSymbol('}');
         outStream.writeSymbol('\n');
+
         Format.indent = true;
         Format.isNewLine = true;
 

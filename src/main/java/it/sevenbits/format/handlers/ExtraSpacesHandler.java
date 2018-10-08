@@ -10,12 +10,11 @@ import java.io.IOException;
  */
 public class ExtraSpacesHandler implements Handler {
     public boolean canDo(char symbol) {
-        if (symbol == ' ') return true;
-        return false;
+        return symbol == ' ';
     }
 
     public void action(OutStream outStream) throws IOException {
-        if (Format.isNewLine == false ) outStream.writeSymbol(' ');
+        if (!Format.isNewLine) outStream.writeSymbol(' ');
         Format.indent = false;
     }
 }

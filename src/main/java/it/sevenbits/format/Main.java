@@ -19,8 +19,7 @@ public class Main {
 
         InStream fr = new FileInStream(nameFileIn);
         OutStream fw = new FileOutStream(nameFileOut);
-        FormatSettings formatSettings = new FormatSettings(nameFileSettings,nameFileJson);
-
+        FormatSettings formatSettings = new FormatSettings(nameFileSettings, nameFileJson);
 
         Format.format(fr, fw, formatSettings);
 
