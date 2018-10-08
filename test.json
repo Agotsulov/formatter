@@ -2,5 +2,6 @@
   "it.sevenbits.format.handlers.SemicolonHandler",
   "it.sevenbits.format.handlers.CloseBraceHandler",
   "it.sevenbits.format.handlers.OpenBraceHandler",
-  "it.sevenbits.format.handlers.ExtraSpacesHandler"
+  "it.sevenbits.format.handlers.ExtraSpacesHandler",
+  "it.sevenbits.format.handlers.AnySymbolHandler"
 ]

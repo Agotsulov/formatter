@@ -5,17 +5,21 @@ import it.sevenbits.format.streams.OutStream;
 
 import java.io.IOException;
 
-/**
- * Created by byzilio on 30.06.15.
- */
-public class ExtraSpacesHandler implements Handler {
+public class AnySymbolHandler implements Handler {
 
+    private char symbol;
+
+    @Override
     public boolean canDo(char symbol) {
-        return symbol == ' ';
+        this.symbol = symbol;
+        return true;
     }
 
+    @Override
     public void action(OutStream outStream) throws IOException {
-        if (!Format.isNewLine) outStream.writeSymbol(' ');
+        outStream.writeSymbol(symbol);
+
         Format.indent = false;
+        Format.isNewLine = false;
     }
 }
