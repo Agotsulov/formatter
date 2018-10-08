@@ -5,22 +5,19 @@ import it.sevenbits.format.streams.OutStream;
 
 import java.io.IOException;
 
-public class AnySymbolHandler extends IndentHandler {
-
-    private char symbol;
+public abstract class IndentHandler implements Handler {
 
     @Override
     public boolean canDo(char symbol) {
-        this.symbol = symbol;
-        return true;
+        return false;
     }
 
     @Override
     public void action(OutStream outStream) throws IOException {
-        super.action(outStream);
-        outStream.writeSymbol(symbol);
-
-        Format.indent = false;
-        Format.isNewLine = false;
+        if (Format.indent){
+            for (int j = 0; j < Format.indentLevel; j++) {
+                outStream.writeString(Format.indentString);
+            }
+        }
     }
 }

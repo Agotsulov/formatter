@@ -14,8 +14,8 @@ public class Format {
     public static int indentLevel = 0;
 
     public static String indentString;
-    
-    public static ArrayList<Handler> handlers = new ArrayList<Handler>();
+
+    public static ArrayList<Handler> handlers = new ArrayList<>();
 
     public static void format(InStream inStream, OutStream outStream,FormatSettings formatSettings) throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
         indentString = formatSettings.getIndentString();
@@ -24,11 +24,6 @@ public class Format {
         while (true) {
             currentSymbol = inStream.readSymbol();
             if (inStream.isEnd()) break;
-            if (indent){
-                for (int j = 0; j < indentLevel; j++) {
-                    outStream.writeString(indentString);
-                }
-            }
             for (Handler handler : handlers) {
                 if (handler.canDo(currentSymbol)) {
                     handler.action(outStream);

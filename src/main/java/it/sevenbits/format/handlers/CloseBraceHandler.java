@@ -14,7 +14,8 @@ public class CloseBraceHandler implements Handler {
     }
 
     public void action(OutStream outStream) throws IOException {
-        outStream.writeSymbol('\n');
+        if(!Format.isNewLine)
+            outStream.writeSymbol('\n');
 
         for (int j = 0; j < Format.indentLevel - 1; j++)
             outStream.writeString(Format.indentString);
